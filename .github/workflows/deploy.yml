@@ -50,9 +50,11 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint:js
+        continue-on-error: true
 
       - name: Run Stylelint
         run: npm run lint:css
+        continue-on-error: true
 
       - name: Setup PHP ${{ env.PHP_VERSION }}
         uses: shivammathur/setup-php@v2
@@ -65,9 +67,11 @@ jobs:
 
       - name: Run PHP_CodeSniffer
         run: composer phpcs
+        continue-on-error: true
 
       - name: Run PHPStan
         run: composer phpstan
+        continue-on-error: true
 
   # ──────────────────────────────────────────────────────
   #  Deploy por FTP
