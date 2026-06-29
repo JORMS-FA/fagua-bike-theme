@@ -162,14 +162,21 @@ Ver guía completa: [docs/DEPLOY.md](docs/DEPLOY.md)
 **Plataformas soportadas:** InfinityFree, 000webhost, AwardSpace, Hostinger,
 o cualquier hosting PHP 8.0+ con acceso FTP.
 
-### Secretos requeridos
+### Setup automatizado (2 min)
 
-Ver [docs/SECRETS.md](docs/SECRETS.md) para la lista completa.
+Una vez tengas tus credenciales, ejecuta el asistente:
 
-```bash
-# Setup inicial en un servidor nuevo
-./tools/deploy-setup.sh
+**Windows (PowerShell):**
+```powershell
+.\tools\setup-hosting.ps1
 ```
+
+**Linux / macOS / Git Bash:**
+```bash
+./tools/setup-hosting.sh
+```
+
+El asistente te guiará paso a paso y configurará los 5 secretos en GitHub automáticamente.
 
 ---
 
