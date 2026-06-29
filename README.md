@@ -144,6 +144,7 @@ Cada push y pull request ejecuta automáticamente:
 | `js-lint`  | Estilo JavaScript (ESLint) |
 | `phpunit`  | Tests unitarios PHP |
 | `playwright` | Tests visuales E2E en 3 viewports |
+| `deploy`   | Deploy automático a FTP tras push a main/develop |
 
 **Estado actual:** Ver [Actions](https://github.com/JORMS-FA/fagua-bike-theme/actions)
 
@@ -151,23 +152,23 @@ Cada push y pull request ejecuta automáticamente:
 
 ## 📦 Despliegue
 
-El repositorio **no se despliega automáticamente** a un servidor. Cuando llegue el momento:
+El deploy es **automático** vía GitHub Actions. Hay dos entornos:
 
-1. **Servidor PHP** (Hostinger, SiteGround, DigitalOcean, etc.)
-2. **Pipeline manual** vía GitHub Actions: `workflow_dispatch`
-3. **Método:** `rsync` o `scp` al servidor
+- **`develop`** → Deploy a staging
+- **`main`** → Deploy a production (con health check)
 
-```yaml
-# Ejemplo de job de deploy (a personalizar)
-- name: Deploy to production
-  uses: burnett01/rsync-deployments@7.0.1
-  with:
-    switches: "-avz --delete --exclude='.git'"
-    path: "./"
-    remote_path: "/var/www/fagua.bike/public_html/wp-content/themes/bicicleteria-fagua-theme/"
-    remote_host: ${{ secrets.FTP_HOST }}
-    remote_user: ${{ secrets.FTP_USER }}
-    remote_key: ${{ secrets.SSH_KEY }}
+Ver guía completa: [docs/DEPLOY.md](docs/DEPLOY.md)
+
+**Plataformas soportadas:** InfinityFree, 000webhost, AwardSpace, Hostinger,
+o cualquier hosting PHP 8.0+ con acceso FTP.
+
+### Secretos requeridos
+
+Ver [docs/SECRETS.md](docs/SECRETS.md) para la lista completa.
+
+```bash
+# Setup inicial en un servidor nuevo
+./tools/deploy-setup.sh
 ```
 
 ---
