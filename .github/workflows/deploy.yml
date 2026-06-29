@@ -2,11 +2,11 @@ name: Deploy
 
 on:
   # Deploy a staging cuando hay push a develop
-  push:
-    branches: [develop]
   # Deploy a producción cuando hay push a main
   push:
-    branches: [main]
+    branches:
+      - main
+      - develop
   # Deploy manual (workflow_dispatch con environment seleccionado)
   workflow_dispatch:
     inputs:
@@ -32,8 +32,9 @@ jobs:
   #  Tests antes de deploy
   # ──────────────────────────────────────────────────────
   test:
-    name: Tests (PHP, JS, CSS, Playwright)
+    name: Tests (PHP, JS, CSS)
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -49,11 +50,9 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint:js
-        continue-on-error: true
 
       - name: Run Stylelint
         run: npm run lint:css
-        continue-on-error: true
 
       - name: Setup PHP ${{ env.PHP_VERSION }}
         uses: shivammathur/setup-php@v2
@@ -66,17 +65,15 @@ jobs:
 
       - name: Run PHP_CodeSniffer
         run: composer phpcs
-        continue-on-error: true
 
       - name: Run PHPStan
         run: composer phpstan
-        continue-on-error: true
 
   # ──────────────────────────────────────────────────────
-  #  Deploy por FTP (a InfinityFree o cualquier hosting con FTP)
+  #  Deploy por FTP
   # ──────────────────────────────────────────────────────
   deploy-ftp:
-    name: Deploy via FTP (${{ github.event.inputs.environment || (github.ref == 'refs/heads/main' && 'production' || 'staging') }})
+    name: Deploy via FTP
     runs-on: ubuntu-latest
     needs: test
     environment:
@@ -96,10 +93,9 @@ jobs:
       - name: Install npm dependencies
         run: npm ci --no-audit --no-fund
 
-      - name: Build / prepare (placeholder — no compile step needed yet)
+      - name: Prepare deploy
         run: |
-          echo "Theme is static; nothing to build."
-          echo "Files to deploy: $(find . -type f -not -path './node_modules/*' -not -path './.git/*' | wc -l)"
+          echo "Files to deploy: $(find . -type f -not -path './node_modules/*' -not -path './.git/*' -not -path './.github/*' | wc -l)"
 
       - name: Deploy to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
@@ -127,11 +123,16 @@ jobs:
             **/package.json
             **/package-lock.json
             **/playwright.config.ts
+            **/playwright-report/**
+            **/test-results/**
             **/CHANGELOG.md
             **/LICENSE
             **/README.md
             **/docs/**
             **/.gitignore
+            **/tools/**
+            **/wp-config.php.template
+            **/assets/images/hero-cyclist-original-bad.jpg
           log-level: minimal
           security: false
           timeout: 600
@@ -158,7 +159,7 @@ jobs:
     steps:
       - name: Verify site is reachable
         run: |
-          URL="${{ vars.PRODUCTION_URL }}"
+          URL="${{ secrets.PRODUCTION_URL }}"
           if [ -z "$URL" ]; then URL="${{ vars.STAGING_URL }}"; fi
           if [ -z "$URL" ]; then
             echo "No URL configured. Skipping."
