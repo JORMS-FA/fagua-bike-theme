@@ -113,8 +113,7 @@ backup-*/
 .eslintcache
 .grunt/
 
-# ── Páginas de prueba del propio repo ────────────────────
-/docs/
+# ── Scripts solo para dev (no producción) ─────────────
 /scripts/dev-only/
 
 # ── Sistema de archivos Windows ──────────────────────────

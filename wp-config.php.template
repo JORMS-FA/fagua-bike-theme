@@ -1,0 +1,72 @@
+<?php
+/**
+ * wp-config.php.template — Plantilla de configuración para despliegue
+ *
+ * NO se versiona wp-config.php real. Este archivo se copia al servidor
+ * y se completa con variables de entorno específicas del entorno.
+ *
+ * Secretos requeridos (NO en el repo):
+ *   - DB_NAME, DB_USER, DB_PASSWORD, DB_HOST
+ *   - AUTH_KEY, SECURE_AUTH_KEY, LOGGED_IN_KEY, NONCE_KEY
+ *   - AUTH_SALT, SECURE_AUTH_SALT, LOGGED_IN_SALT, NONCE_SALT
+ *
+ * El operador del servidor (o un script de bootstrap) debe:
+ *   1. Copiar este template a wp-config.php
+ *   2. Rellenar los valores o usar getenv()
+ *
+ * @package BicicleteriaFagua
+ */
+
+// No permitir acceso directo
+if ( ! defined( 'ABSPATH' ) ) {
+    define( 'ABSPATH', __DIR__ . '/' );
+}
+
+// ── Modo debug según entorno ──────────────────────────
+$is_production = ( getenv( 'BF_ENV' ) === 'production' );
+
+define( 'WP_DEBUG',         ! $is_production );
+define( 'WP_DEBUG_LOG',     ! $is_production );
+define( 'WP_DEBUG_DISPLAY', ! $is_production );
+define( 'SCRIPT_DEBUG',     ! $is_production );
+
+// ── Base de datos ─────────────────────────────────────
+define( 'DB_NAME',     getenv( 'DB_NAME' )     ?: 'fagua_bike' );
+define( 'DB_USER',     getenv( 'DB_USER' )     ?: 'fagua_user' );
+define( 'DB_PASSWORD', getenv( 'DB_PASSWORD' ) ?: '' );
+define( 'DB_HOST',     getenv( 'DB_HOST' )     ?: 'localhost' );
+define( 'DB_CHARSET',  'utf8mb4' );
+define( 'DB_COLLATE',  '' );
+
+// ── Secret keys (generar con https://api.wordpress.org/secret-key/1.1/salt/) ──
+define( 'AUTH_KEY',         getenv( 'AUTH_KEY' )         ?: 'put-your-unique-phrase-here' );
+define( 'SECURE_AUTH_KEY',  getenv( 'SECURE_AUTH_KEY' )  ?: 'put-your-unique-phrase-here' );
+define( 'LOGGED_IN_KEY',    getenv( 'LOGGED_IN_KEY' )    ?: 'put-your-unique-phrase-here' );
+define( 'NONCE_KEY',        getenv( 'NONCE_KEY' )        ?: 'put-your-unique-phrase-here' );
+define( 'AUTH_SALT',        getenv( 'AUTH_SALT' )        ?: 'put-your-unique-phrase-here' );
+define( 'SECURE_AUTH_SALT', getenv( 'SECURE_AUTH_SALT' ) ?: 'put-your-unique-phrase-here' );
+define( 'LOGGED_IN_SALT',   getenv( 'LOGGED_IN_SALT' )   ?: 'put-your-unique-phrase-here' );
+define( 'NONCE_SALT',       getenv( 'NONCE_SALT' )       ?: 'put-your-unique-phrase-here' );
+
+// ── Tabla prefix ──────────────────────────────────────
+$table_prefix = getenv( 'BF_TABLE_PREFIX' ) ?: 'wp_';
+
+// ── URLs según entorno ────────────────────────────────
+$site_url = getenv( 'BF_SITE_URL' ) ?: 'https://example.com';
+define( 'WP_SITEURL',    $site_url );
+define( 'WP_HOME',       $site_url );
+define( 'WP_CONTENT_URL', $site_url . '/wp-content' );
+
+// ── Forzar SSL en producción ──────────────────────────
+if ( $is_production ) {
+    define( 'FORCE_SSL_ADMIN', true );
+    if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) {
+        $_SERVER['HTTPS'] = 'on';
+    }
+}
+
+// ── Paths absolutos ───────────────────────────────────
+if ( ! defined( 'ABSPATH' ) ) {
+    define( 'ABSPATH', __DIR__ . '/' );
+}
+require_once ABSPATH . 'wp-settings.php';
