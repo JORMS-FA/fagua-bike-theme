@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 560" width="512" height="560" role="img" aria-label="FAGUA shield badge logo">
+  <!-- Hexagonal cyclist's badge with "FAGUA" wordmark, a stylized mountain + wheel motif, and vintage-modern divider lines. Dark-background safe. -->
+  <title>FAGUA Shield</title>
+  <defs>
+    <linearGradient id="fgs-stroke" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FAFAFA"/>
+      <stop offset="1" stop-color="#A1A1AA"/>
+    </linearGradient>
+    <linearGradient id="fgs-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FB7185"/>
+      <stop offset="1" stop-color="#E11D48"/>
+    </linearGradient>
+  </defs>
+  <!-- Hexagonal badge outline (flat-top orientation) -->
+  <path d="M256 40 L432 142 L432 358 L256 460 L80 358 L80 142 Z" fill="none" stroke="url(#fgs-stroke)" stroke-width="8"/>
+  <!-- Inner hexagon border for the vintage frame -->
+  <path d="M256 64 L410 154 L410 346 L256 436 L102 346 L102 154 Z" fill="none" stroke="url(#fgs-stroke)" stroke-width="2" opacity="0.55"/>
+  <!-- Stylized mountains -->
+  <path d="M150 300 L210 220 L250 270 L300 200 L362 300 Z" fill="url(#fgs-accent)"/>
+  <!-- Wheel: outer ring + spokes + hub, placed below the mountains -->
+  <g transform="translate(256,372)">
+    <circle r="44" fill="none" stroke="url(#fgs-stroke)" stroke-width="6"/>
+    <circle r="8" fill="url(#fgs-stroke)"/>
+    <g stroke="url(#fgs-stroke)" stroke-width="3" stroke-linecap="round">
+      <line x1="0" y1="-40" x2="0" y2="40"/>
+      <line x1="-40" y1="0" x2="40" y2="0"/>
+      <line x1="-28" y1="-28" x2="28" y2="28"/>
+      <line x1="-28" y1="28" x2="28" y2="-28"/>
+    </g>
+  </g>
+  <!-- Top divider line above the wordmark -->
+  <line x1="150" y1="470" x2="362" y2="470" stroke="url(#fgs-stroke)" stroke-width="2" opacity="0.6"/>
+  <!-- Wordmark FAGUA as geometric letterforms -->
+  <g fill="url(#fgs-stroke)" transform="translate(96,486)">
+    <!-- F -->
+    <rect x="0" y="0" width="16" height="58" rx="2"/>
+    <rect x="0" y="0" width="64" height="16" rx="2"/>
+    <rect x="0" y="22" width="50" height="14" rx="2"/>
+    <!-- A -->
+    <path d="M84 58 L110 0 L124 0 L98 58 Z"/>
+    <path d="M92 30 L118 30 L118 40 L92 40 Z"/>
+    <!-- G as a ring (cycling nod) -->
+    <circle cx="158" cy="29" r="20" fill="none" stroke="url(#fgs-stroke)" stroke-width="7"/>
+    <rect x="158" y="22" width="14" height="14" rx="2" fill="url(#fgs-stroke)"/>
+    <!-- U -->
+    <path d="M196 0 L196 38 Q196 58 216 58 L240 58 Q260 58 260 38 L260 0 L244 0 L244 38 Q244 44 240 44 L216 44 Q210 44 210 38 L210 0 Z"/>
+    <!-- A -->
+    <path d="M272 58 L298 0 L312 0 L286 58 Z"/>
+    <path d="M280 30 L306 30 L306 40 L280 40 Z"/>
+  </g>
+</svg>

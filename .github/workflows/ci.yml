@@ -1,0 +1,142 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+# Cancelar ejecuciones anteriores si hay un push nuevo en la misma rama
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PHP_VERSION: '8.2'
+  NODE_VERSION: '20'
+
+jobs:
+  # ──────────────────────────────────────────────────────
+  #  PHP — Lint (WordPress Coding Standards)
+  # ──────────────────────────────────────────────────────
+  php-lint:
+    name: PHP Lint (WPCS)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ env.PHP_VERSION }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: mbstring, intl, dom
+          coverage: none
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-php-${{ env.PHP_VERSION }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ runner.os }}-php-${{ env.PHP_VERSION }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Run PHP_CodeSniffer
+        run: composer phpcs
+        continue-on-error: false
+
+  # ──────────────────────────────────────────────────────
+  #  PHP — Static analysis (PHPStan)
+  # ──────────────────────────────────────────────────────
+  phpstan:
+    name: PHP Static Analysis (PHPStan)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP ${{ env.PHP_VERSION }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          extensions: mbstring, intl, dom
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Run PHPStan
+        run: composer phpstan
+        continue-on-error: true  # PHPStan: informativo en esta fase
+
+  # ──────────────────────────────────────────────────────
+  #  JavaScript — Lint (ESLint)
+  # ──────────────────────────────────────────────────────
+  js-lint:
+    name: JS Lint (ESLint)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Run ESLint
+        run: npm run lint:js
+        continue-on-error: true  # informativo en esta fase
+
+  # ──────────────────────────────────────────────────────
+  #  CSS — Lint (Stylelint)
+  # ──────────────────────────────────────────────────────
+  css-lint:
+    name: CSS Lint (Stylelint)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install npm dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Run Stylelint
+        run: npm run lint:css
+        continue-on-error: true  # informativo en esta fase
+
+  # ──────────────────────────────────────────────────────
+  #  Resumen del CI
+  # ──────────────────────────────────────────────────────
+  ci-summary:
+    name: CI Summary
+    runs-on: ubuntu-latest
+    needs: [php-lint, phpstan, js-lint, css-lint]
+    if: always()
+    steps:
+      - name: Resumen de checks
+        run: |
+          echo "## CI Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Check | Estado |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| PHP Lint (WPCS) | ${{ needs.php-lint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| PHPStan | ${{ needs.phpstan.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| ESLint (JS) | ${{ needs.js-lint.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Stylelint (CSS) | ${{ needs.css-lint.result }} |" >> $GITHUB_STEP_SUMMARY

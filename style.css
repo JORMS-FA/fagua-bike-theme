@@ -1,0 +1,12 @@
+/*
+Theme Name: Bicicletería Fagua
+Template: storefront
+Version: 1.0.1
+Description: Tema personalizado para Bicicletería Fagua — estética premium minimalista sobre Storefront. Solo contiene metadata del tema. Toda la lógica visual está en assets/css/theme.css.
+Author: Bicicletería Fagua
+Text Domain: bf
+*/
+
+/* Keep this file empty on purpose.
+   Visual styles live in assets/css/theme.css (loaded by inc/enqueue.php).
+   Storefront parent stylesheet is imported from theme.css to preserve load order. */

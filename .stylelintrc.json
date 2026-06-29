@@ -1,0 +1,22 @@
+{
+    "extends": ["stylelint-config-standard"],
+    "rules": {
+        "selector-class-pattern": null,
+        "custom-property-pattern": null,
+        "no-descending-specificity": null,
+        "alpha-value-notation": null,
+        "color-function-notation": null,
+        "hue-degree-notation": null,
+        "media-feature-range-notation": "prefix",
+        "import-notation": null,
+        "declaration-block-no-redundant-longhand-properties": null
+    },
+    "ignoreFiles": [
+        "node_modules/**",
+        "vendor/**",
+        "dist/**",
+        "build/**",
+        "playwright-report/**",
+        "test-results/**"
+    ]
+}

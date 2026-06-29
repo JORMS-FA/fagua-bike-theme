@@ -1,0 +1,37 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es2022": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended"],
+    "parserOptions": {
+        "ecmaVersion": 2022,
+        "sourceType": "script"
+    },
+    "globals": {
+        "wp": "readonly",
+        "BF_VERSION": "readonly",
+        "BF_AJAX_URL": "readonly",
+        "BF_NONCE": "readonly",
+        "jQuery": "readonly",
+        "console": "readonly"
+    },
+    "rules": {
+        "no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+        "no-console": "off",
+        "prefer-const": "warn",
+        "no-var": "error",
+        "eqeqeq": ["error", "smart"],
+        "no-undef": "error"
+    },
+    "ignorePatterns": [
+        "node_modules/",
+        "vendor/",
+        "dist/",
+        "build/",
+        "tests-results/",
+        "playwright-report/"
+    ]
+}

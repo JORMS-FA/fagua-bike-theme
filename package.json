@@ -1,0 +1,33 @@
+{
+  "name": "bicicleteria-fagua-theme",
+  "version": "1.0.1",
+  "description": "Tema personalizado para Bicicletería Fagua — estética premium minimalista sobre Storefront.",
+  "private": true,
+  "type": "commonjs",
+  "author": {
+    "name": "Bicicletería Fagua",
+    "url": "https://github.com/JORMS-FA/fagua-bike-theme"
+  },
+  "license": "GPL-2.0-or-later",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "lint:js": "eslint assets/js/",
+    "lint:css": "stylelint \"assets/css/**/*.css\"",
+    "lint:php": "phpcs --standard=WordPress .",
+    "lint:fix:js": "eslint --fix assets/js/",
+    "lint:fix:css": "stylelint --fix \"assets/css/**/*.css\"",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:report": "playwright show-report",
+    "verify": "npm run lint:js && npm run lint:css"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "eslint": "^9.18.0",
+    "stylelint": "^16.13.0",
+    "stylelint-config-standard": "^36.0.1"
+  }
+}

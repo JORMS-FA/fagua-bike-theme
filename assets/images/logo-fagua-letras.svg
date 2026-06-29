@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 320" width="1100" height="320" role="img" aria-label="FAGUA wordmark with handlebar and wheel mark">
+  <!-- "FAGUA" wordmark with a modern minimal handlebar+wheel mark to the left. Dark-background safe, performance cycling aesthetic. -->
+  <title>FAGUA Letras</title>
+  <defs>
+    <linearGradient id="fgl-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FAFAFA"/>
+      <stop offset="1" stop-color="#9CA3AF"/>
+    </linearGradient>
+    <linearGradient id="fgl-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FB7185"/>
+      <stop offset="1" stop-color="#E11D48"/>
+    </linearGradient>
+  </defs>
+  <!-- Handlebar + wheel mark (left) -->
+  <g transform="translate(120,160)">
+    <!-- Wheel -->
+    <circle r="66" fill="none" stroke="url(#fgl-accent)" stroke-width="10"/>
+    <circle r="10" fill="url(#fgl-accent)"/>
+    <g stroke="url(#fgl-grad)" stroke-width="3" stroke-linecap="round" opacity="0.85">
+      <line x1="0" y1="-58" x2="0" y2="58"/>
+      <line x1="-58" y1="0" x2="58" y2="0"/>
+      <line x1="-41" y1="-41" x2="41" y2="41"/>
+      <line x1="-41" y1="41" x2="41" y2="-41"/>
+    </g>
+    <!-- Handlebar sweep rising above the wheel, modern drop-bar silhouette -->
+    <path d="M-58 -90 Q0 -118 58 -90" fill="none" stroke="url(#fgl-grad)" stroke-width="10" stroke-linecap="round"/>
+    <!-- Stem connecting handlebar to hub -->
+    <line x1="0" y1="-104" x2="0" y2="-10" stroke="url(#fgl-grad)" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <!-- Wordmark FAGUA -->
+  <g fill="url(#fgl-grad)" transform="translate(260,70)">
+    <!-- F -->
+    <rect x="0" y="0" width="28" height="180" rx="5"/>
+    <rect x="0" y="0" width="120" height="28" rx="5"/>
+    <rect x="0" y="76" width="96" height="26" rx="5"/>
+    <!-- A -->
+    <path d="M166 180 L218 0 L246 0 L194 180 Z"/>
+    <path d="M184 76 L232 76 L232 102 L184 102 Z"/>
+    <!-- G as a clean ring with tab (handlebar/stem nod kept subtle) -->
+    <circle cx="306" cy="90" r="62" fill="none" stroke="url(#fgl-grad)" stroke-width="22"/>
+    <rect x="306" y="76" width="44" height="28" rx="6" fill="url(#fgl-grad)"/>
+    <!-- U -->
+    <path d="M392 0 L392 120 Q392 180 452 180 L508 180 Q568 180 568 120 L568 0 L540 0 L540 120 Q540 152 508 152 L452 152 Q420 152 420 120 L420 0 Z"/>
+    <!-- A -->
+    <path d="M590 180 L642 0 L670 0 L618 180 Z"/>
+    <path d="M608 76 L656 76 L656 102 L608 102 Z"/>
+  </g>
+</svg>

@@ -1,0 +1,44 @@
+# GitAttributes: configuración de git para este repositorio
+# https://git-scm.com/docs/gitattributes
+
+# Normalización de finales de línea
+*               text=auto eol=lf
+
+# Archivos con CRLF en Windows
+*.bat           text eol=crlf
+*.cmd           text eol=crlf
+*.ps1           text eol=crlf
+
+# Archivos binarios (no aplicar diff ni merge)
+*.png           binary
+*.jpg           binary
+*.jpeg          binary
+*.gif           binary
+*.webp          binary
+*.ico           binary
+*.pdf           binary
+*.zip           binary
+*.gz            binary
+*.tar           binary
+*.7z            binary
+*.woff          binary
+*.woff2         binary
+*.ttf           binary
+*.eot           binary
+*.svg           -text
+
+# Exportar ignorados de PHP_CodeSniffer y ESLint
+.gitignore      export-ignore
+.gitattributes  export-ignore
+.eslintrc.json  export-ignore
+.stylelintrc.json export-ignore
+phpcs.xml.dist  export-ignore
+phpstan.neon.dist export-ignore
+phpunit.xml.dist export-ignore
+.editorconfig   export-ignore
+.github/        export-ignore
+tests/          export-ignore
+node_modules/   export-ignore
+vendor/         export-ignore
+docs/           export-ignore
+*.md            !export-ignore

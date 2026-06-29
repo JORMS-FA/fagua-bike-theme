@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="FAGUA monogram logo">
+  <!-- Premium minimalist monogram: "F" formed from geometric bars with an integrated chain-link gap in the crossbar. Designed for dark backgrounds. -->
+  <title>FAGUA Monogram</title>
+  <defs>
+    <linearGradient id="fgm-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4F4F5"/>
+      <stop offset="1" stop-color="#A1A1AA"/>
+    </linearGradient>
+    <linearGradient id="fgm-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FB7185"/>
+      <stop offset="1" stop-color="#E11D48"/>
+    </linearGradient>
+  </defs>
+  <g fill="none">
+    <!-- Vertical stem of the F -->
+    <rect x="168" y="120" width="56" height="272" rx="8" fill="url(#fgm-grad)"/>
+    <!-- Top horizontal bar of the F (upper crossbar) -->
+    <rect x="168" y="120" width="176" height="56" rx="8" fill="url(#fgm-grad)"/>
+    <!-- Lower crossbar (shorter, sits below midline) with a chain-link negative-space gap to imply a chain link -->
+    <rect x="168" y="268" width="124" height="56" rx="8" fill="url(#fgm-grad)"/>
+    <!-- Chain-link accent: a thin ring bridging the crossbar gap as a subtle cycling reference -->
+    <circle cx="312" cy="296" r="26" stroke="url(#fgm-accent)" stroke-width="10"/>
+    <!-- Tiny inner notch so the ring reads as a chain link not a plain circle -->
+    <path d="M300 296 h24 M312 284 v24" stroke="url(#fgm-accent)" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<ruleset name="Bicicletería Fagua">
+    <description>Reglas de estilo PHP para el tema de Bicicletería Fagua.</description>
+
+    <!-- Estándar: WordPress-Core + WordPress-Extra -->
+    <rule ref="WordPress">
+        <exclude name="WordPress.Security.NonceVerification"/>
+        <exclude name="WordPress.Security.ValidatedSanitizedInput"/>
+        <exclude name="WordPress.WP.I18n"/>
+    </rule>
+    <rule ref="WordPress-Extra"/>
+    <rule ref="WordPress-Docs"/>
+    <rule ref="WordPress-VIP-Go"/>
+
+    <!-- Versión PHP -->
+    <config name="testVersion" value="8.0-"/>
+
+    <!-- Rutas analizadas -->
+    <file>./functions.php</file>
+    <file>./front-page.php</file>
+    <file>./header.php</file>
+    <file>./footer.php</file>
+    <file>./archive-product.php</file>
+    <file>./single-product.php</file>
+    <file>./index.php</file>
+    <file>./template-parts/</file>
+    <file>./woocommerce/</file>
+    <file>./inc/</file>
+
+    <!-- Excluir archivos y carpetas que no son código del tema -->
+    <exclude-pattern>*/node_modules/*</exclude-pattern>
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/.git/*</exclude-pattern>
+    <exclude-pattern>*/tests/*</exclude-pattern>
+    <exclude-pattern>*/dist/*</exclude-pattern>
+    <exclude-pattern>*/build/*</exclude-pattern>
+    <exclude-pattern>*/assets/branding/*</exclude-pattern>
+    <exclude-pattern>*/assets/favicon/*</exclude-pattern>
+    <exclude-pattern>*/assets/icons/*</exclude-pattern>
+
+    <!-- Solo el archivo, no un directorio -->
+    <exclude-pattern>*/style.css</exclude-pattern>
+
+    <!-- Indentación: 4 espacios (estándar WP) -->
+    <arg name="tab-width" value="4"/>
+
+    <!-- Mostrar progreso, warnings y sniff codes -->
+    <arg value="sp"/>
+    <arg value="s"/>
+</ruleset>

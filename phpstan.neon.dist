@@ -1,0 +1,21 @@
+parameters:
+    level: 5
+    paths:
+        - functions.php
+        - front-page.php
+        - header.php
+        - footer.php
+        - archive-product.php
+        - single-product.php
+        - index.php
+        - template-parts
+        - woocommerce
+        - inc
+    excludePaths:
+        - node_modules/*
+        - vendor/*
+        - tests/*
+    treatPhpDocTypesAsCertain: false
+    checkMissingIterableValueType: false
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon

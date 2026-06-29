@@ -1,0 +1,131 @@
+# ═══════════════════════════════════════════════════════════
+#  BICICLETERÍA FAGUA — WordPress Theme
+#  .gitignore — Reglas de exclusión de archivos del repositorio
+# ═══════════════════════════════════════════════════════════
+
+# ── WordPress core (NO se versiona) ──────────────────────
+wp-config.php
+wp-config-*.php
+*.wp-config.php
+wp-admin/
+wp-includes/
+wp-content/index.php
+wp-content/upgrade/
+wp-content/cache/
+wp-content/w3tc-config/
+wp-content/wflogs/
+wp-content/ai1wm-backups/
+wp-content/backups/
+wp-content/debug.log
+wp-content/uploads/
+!wp-content/uploads/.gitkeep
+
+# ── Plugins y mu-plugins (NO se versionan) ───────────────
+wp-content/plugins/
+wp-content/mu-plugins/
+
+# ── LocalWP y entornos de desarrollo ─────────────────────
+.localwp/
+.local/
+local-env/
+*.local.sql
+local.sql
+local.sqlite
+.license-data/
+
+# ── Dependencias ─────────────────────────────────────────
+node_modules/
+vendor/
+.bundle/
+.npm/
+.yarn/
+.pnpm-store/
+
+# ── Builds y artefactos ──────────────────────────────────
+dist/
+build/
+.cache/
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ── Entornos y credenciales ──────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+credentials.json
+secrets.json
+
+# ── Sistema ──────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── IDEs y editores ──────────────────────────────────────
+.vscode/
+!.vscode/settings.json.example
+.idea/
+*.swp
+*.swo
+*~
+.cache/
+*.sublime-project
+*.sublime-workspace
+
+# ── Tests y cobertura ────────────────────────────────────
+coverage/
+playwright-report/
+test-results/
+playwright/.cache/
+.nyc_output/
+*.lcov
+
+# ── Backups locales ──────────────────────────────────────
+*.bak
+*.orig
+*.rej
+*.old
+backup-*/
+*.sql.gz
+
+# ── Archivos temporales de la sesión ─────────────────────
+~*.tmp
+*.tmp
+*.swp
+
+# ── Reportes de herramientas ─────────────────────────────
+.phpcs.cache
+.phpunit.result.cache
+.phpunit-watcher.yml
+.stylelintcache
+.eslintcache
+.grunt/
+
+# ── Páginas de prueba del propio repo ────────────────────
+/docs/
+/scripts/dev-only/
+
+# ── Sistema de archivos Windows ──────────────────────────
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+*.user
+*.suo
+*.userprefs
+hero-cyclist-original-bad.jpg
+
+# Backup de pruebas de sesión
+*.original-bad.*
