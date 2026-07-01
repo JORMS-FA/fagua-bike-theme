@@ -1,0 +1,17 @@
+# WordPress / PHP
+*.log
+*.cache
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+npm-debug.log
+
+# Editor
+.vscode/
+.idea/
+
+# Secrets
+.env
+wp-config.php
